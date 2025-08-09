@@ -1,0 +1,338 @@
+import * as outputs from "../types/output";
+export interface CorpCloudwafInstanceDeployment {
+    dnsEntry: string;
+    egressIps: outputs.CorpCloudwafInstanceDeploymentEgressIp[];
+    message: string;
+    status: string;
+}
+export interface CorpCloudwafInstanceDeploymentEgressIp {
+    ip: string;
+    status: string;
+    updatedAt: string;
+}
+export interface CorpCloudwafInstanceWorkspaceConfig {
+    /**
+     * Specify the request header containing the client IP address, available when InstanceLocation is set to "advanced". Default: "X-Forwarded-For".
+     */
+    clientIpHeader?: string;
+    /**
+     * Set instance location to "direct" or "advanced".
+     */
+    instanceLocation: string;
+    /**
+     * Specify the protocol or protocols required. ex. ["http", "https"], ["https"].
+     */
+    listenerProtocols: string[];
+    /**
+     * Routes
+     */
+    routes: outputs.CorpCloudwafInstanceWorkspaceConfigRoute[];
+    /**
+     * Site name.
+     */
+    siteName: string;
+}
+export interface CorpCloudwafInstanceWorkspaceConfigRoute {
+    /**
+     * List of certificate IDs in string associated with request URI or domains. IDs will be available in certificate GET request.
+     */
+    certificateIds?: string[];
+    /**
+     * If enabled, this will allow open TCP connections to be reused (default: true)
+     */
+    connectionPooling?: boolean;
+    /**
+     * List of domain or request URIs, up to 100 entries.
+     */
+    domains: string[];
+    /**
+     * Route unique identifier.
+     */
+    id: string;
+    /**
+     * Origin server URI.
+     */
+    origin: string;
+    /**
+     * Pass the client supplied host header through to the upstream (including the upstream TLS handshake for use with SNI and certificate validation). If using Heroku or Server Name Indications (SNI), this must be disabled (default: false).
+     */
+    passHostHeader?: boolean;
+    /**
+     * If true, will trust proxy headers coming into the agent. If false, will ignore and drop those headers (default: false)
+     */
+    trustProxyHeaders?: boolean;
+}
+export interface CorpRuleAction {
+    /**
+     * signal id
+     */
+    signal?: string;
+    /**
+     * (block, allow, addSignal, excludeSignal)
+     */
+    type: string;
+}
+export interface CorpRuleCondition {
+    /**
+     * Conditions
+     */
+    conditions?: outputs.CorpRuleConditionCondition[];
+    /**
+     * types:
+     *     - single - (scheme, method, path, useragent, domain, ip, responseCode, agentname, paramname, paramvalue, country, name, valueString, valueInt, valueIp, signalType, value, ja3Fingerprint, ja4Fingerprint, protocolVersion)
+     *     - multival - (signal, requestHeader, queryParameter, postParameter, requestCookie, responseHeader)
+     */
+    field?: string;
+    /**
+     * type: group, multival - Conditions that must be matched when evaluating the request (all, any)
+     */
+    groupOperator?: string;
+    /**
+     * type: single - (equals, doesNotEqual, contains, doesNotContain, greaterEqual, lesserEqual, like, notLike, exists, doesNotExist, inList, notInList)
+     */
+    operator?: string;
+    /**
+     * (group, multival, single)
+     */
+    type: string;
+    /**
+     * type: single - See request fields (https://docs.signalsciences.net/using-signal-sciences/features/rules/#request-fields)
+     */
+    value?: string;
+}
+export interface CorpRuleConditionCondition {
+    /**
+     * Conditions
+     */
+    conditions?: outputs.CorpRuleConditionConditionCondition[];
+    /**
+     * types:
+     *     - single - (scheme, method, path, useragent, domain, ip, responseCode, agentname, paramname, paramvalue, country, name, valueString, valueInt, valueIp, signalType, value, ja3Fingerprint, ja4Fingerprint, protocolVersion)
+     *     - multival - (signal, requestHeader, queryParameter, postParameter, requestCookie, responseHeader)
+     */
+    field?: string;
+    /**
+     * type: group, multival - Conditions that must be matched when evaluating the request (all, any)
+     */
+    groupOperator?: string;
+    /**
+     * type: single - (equals, doesNotEqual, contains, doesNotContain, greaterEqual, lesserEqual, like, notLike, exists, doesNotExist, inList, notInList)
+     */
+    operator?: string;
+    /**
+     * (group, multival, single)
+     */
+    type: string;
+    /**
+     * type: single - See request fields (https://docs.fastly.com/signalsciences/using-signal-sciences/rules/defining-rule-conditions/#fields)
+     */
+    value?: string;
+}
+export interface CorpRuleConditionConditionCondition {
+    /**
+     * types:
+     *     - single - (scheme, method, path, useragent, domain, ip, responseCode, agentname, paramname, paramvalue, country, name, valueString, valueInt, valueIp, signalType, value, ja3Fingerprint, ja4Fingerprint, protocolVersion)
+     *     - multival - (signal, requestHeader, queryParameter, postParameter, requestCookie, responseHeader)
+     */
+    field?: string;
+    /**
+     * type: group, multival - Conditions that must be matched when evaluating the request (all, any)
+     */
+    groupOperator?: string;
+    /**
+     * type: single - (equals, doesNotEqual, contains, doesNotContain, greaterEqual, lesserEqual, like, notLike, exists, doesNotExist, inList, notInList)
+     */
+    operator?: string;
+    /**
+     * (group, multival, single)
+     */
+    type: string;
+    /**
+     * type: single - See request fields (https://docs.fastly.com/signalsciences/using-signal-sciences/rules/defining-rule-conditions/#fields)
+     */
+    value?: string;
+}
+export interface GetSitesSite {
+    agentAnonMode: string;
+    agentLevel: string;
+    agentsUri: string;
+    alertsUri: string;
+    analyticsEventsUri: string;
+    blacklistUri: string;
+    blockDurationSecs: number;
+    blockHttpCode: number;
+    blockRedirectUrl: string;
+    clientIpRules: string[];
+    created: string;
+    displayName: string;
+    eventsUri: string;
+    headerLinksUri: string;
+    integrationsUri: string;
+    membersUri: string;
+    monitorsUri: string;
+    name: string;
+    redactionsUri: string;
+    requestsUri: string;
+    suspiciousIpsUri: string;
+    topAttacksUri: string;
+    whitelistUri: string;
+}
+export interface SiteAttackThreshold {
+    interval: number;
+    threshold: number;
+}
+export interface SiteIntegrationField {
+    name: string;
+    value: string;
+}
+export interface SiteRuleAction {
+    /**
+     * Allows toggling between a non-interactive and interactive browser challenge. Only valid with the 'browserChallenge' action type.
+     */
+    allowInteractive?: boolean;
+    /**
+     * URL to redirect to when blocking response code is set to 301 or 302
+     */
+    redirectUrl?: string;
+    /**
+     * HTTP code agent for agent to respond with. range: 301, 302, or 400-599, defaults to '406' if not provided. Only valid with the 'block' action type.
+     */
+    responseCode?: number;
+    /**
+     * signal id to tag
+     */
+    signal?: string;
+    /**
+     * (addSignal, allow, block, browserChallenge, dynamicChallenge, excludeSignal, verifyToken) (rateLimit rule valid values: logRequest, blockSignal, browserChallenge, verifyToken)
+     */
+    type: string;
+}
+export interface SiteRuleCondition {
+    /**
+     * Conditions
+     */
+    conditions?: outputs.SiteRuleConditionCondition[];
+    /**
+     * types:
+     *     - single - (scheme, method, path, useragent, domain, ip, responseCode, agentname, paramname, paramvalue, country, name, valueString, valueInt, valueIp, signalType, value, ja3Fingerprint, ja4Fingerprint, protocolVersion)
+     *     - multival - (signal, requestHeader, queryParameter, postParameter, requestCookie, responseHeader)
+     */
+    field?: string;
+    /**
+     * type: group, multival - Conditions that must be matched when evaluating the request (all, any)
+     */
+    groupOperator?: string;
+    /**
+     * type: single - (equals, doesNotEqual, contains, doesNotContain, greaterEqual, lesserEqual, like, notLike, exists, doesNotExist, matches, doesNotMatch, inList, notInList)
+     */
+    operator?: string;
+    /**
+     * (group, multival, single)
+     */
+    type: string;
+    /**
+     * type: single - See request fields (https://docs.fastly.com/signalsciences/using-signal-sciences/rules/defining-rule-conditions/#fields)
+     */
+    value?: string;
+}
+export interface SiteRuleConditionCondition {
+    /**
+     * Conditions
+     */
+    conditions?: outputs.SiteRuleConditionConditionCondition[];
+    /**
+     * types:
+     *     - single - (scheme, method, path, useragent, domain, ip, responseCode, agentname, paramname, paramvalue, country, name, valueString, valueInt, valueIp, signalType, value, ja3Fingerprint, ja4Fingerprint, protocolVersion)
+     *     - multival - (signal, requestHeader, queryParameter, postParameter, requestCookie, responseHeader)
+     */
+    field?: string;
+    /**
+     * type: group, multival - Conditions that must be matched when evaluating the request (all, any)
+     */
+    groupOperator?: string;
+    /**
+     * type: single - (equals, doesNotEqual, contains, doesNotContain, greaterEqual, lesserEqual, like, notLike, exists, doesNotExist, matches, doesNotMatch, inList, notInList)
+     */
+    operator?: string;
+    /**
+     * (group, multival, single)
+     */
+    type: string;
+    /**
+     * type: single - See request fields (https://docs.fastly.com/signalsciences/using-signal-sciences/rules/defining-rule-conditions/#fields)
+     */
+    value?: string;
+}
+export interface SiteRuleConditionConditionCondition {
+    /**
+     * types:
+     *     - single - (scheme, method, path, useragent, domain, ip, responseCode, agentname, paramname, paramvalue, country, name, valueString, valueInt, valueIp, signalType, value, ja3Fingerprint, ja4Fingerprint, protocolVersion)
+     *     - multival - (signal, requestHeader, queryParameter, postParameter, requestCookie, responseHeader)
+     */
+    field?: string;
+    /**
+     * type: group, multival - Conditions that must be matched when evaluating the request (all, any)
+     */
+    groupOperator?: string;
+    /**
+     * type: single - (equals, doesNotEqual, contains, doesNotContain, greaterEqual, lesserEqual, like, notLike, exists, doesNotExist, matches, doesNotMatch, inList, notInList)
+     */
+    operator?: string;
+    /**
+     * (group, multival, single)
+     */
+    type: string;
+    /**
+     * type: single - See request fields (https://docs.fastly.com/signalsciences/using-signal-sciences/rules/defining-rule-conditions/#fields)
+     */
+    value?: string;
+}
+export interface SiteRuleRateLimit {
+    /**
+     * Client Identifiers
+     */
+    clientIdentifiers: outputs.SiteRuleRateLimitClientIdentifier[];
+    /**
+     * duration in seconds (300 < x < 3600)
+     */
+    duration: number;
+    /**
+     * interval in minutes (1, 5, 10)
+     */
+    interval: number;
+    /**
+     * threshold
+     */
+    threshold: number;
+}
+export interface SiteRuleRateLimitClientIdentifier {
+    key?: string;
+    name?: string;
+    /**
+     * (ip, requestHeader, requestCookie, postParameter, signalPayload)
+     */
+    type: string;
+}
+export interface SiteTemplatedRuleAlert {
+    /**
+     * To block requests immediately use (blockImmediate), Threshold level blocking: For logging use (info), for blocking use (template)
+     */
+    action: string;
+    blockDurationSeconds: number;
+    enabled: boolean;
+    id: string;
+    interval?: number;
+    longName: string;
+    skipNotifications: boolean;
+    threshold?: number;
+}
+export interface SiteTemplatedRuleDetection {
+    enabled: boolean;
+    fields?: outputs.SiteTemplatedRuleDetectionField[];
+    id: string;
+    name: string;
+}
+export interface SiteTemplatedRuleDetectionField {
+    name: string;
+    value: string;
+}

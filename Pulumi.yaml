@@ -1,0 +1,17 @@
+name: pulumi-component-sigsci
+description: A minimal TypeScript Pulumi program
+runtime:
+  name: nodejs
+  options:
+    packagemanager: npm
+config:
+  pulumi:tags:
+    value:
+      pulumi:template: typescript
+packages:
+  sigsci:
+    source: terraform-provider
+    version: 0.10.0
+    parameters:
+      - signalsciences/sigsci
+      - 3.7.0
