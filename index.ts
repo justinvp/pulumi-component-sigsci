@@ -1,5 +1,5 @@
 import * as pulumi from "@pulumi/pulumi";
-import * as sigsci from "@pulumi/sigsci";
+import * as sigsci from "./sdks/sigsci";
 
 interface SigSciArgs { }
 
